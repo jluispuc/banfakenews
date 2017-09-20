@@ -38,8 +38,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Reportar', 'url' => ['/report']],
-            ['label' => 'Consultar', 'url' => ['/view']],
+            ['label' => 'Consultar', 'url' => ['/report/index']],
+            ['label' => 'Agregar un Reporte', 'url' => ['/report/create']],
             /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
