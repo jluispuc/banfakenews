@@ -22,8 +22,13 @@ class ReportController extends Controller
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['index', 'create', 'update', 'delete'],
+                'only' => ['create', 'update', 'delete'],
                 'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['login', 'signup', 'index'],
+                        'roles' => ['?'],
+                    ],
                     // allow authenticated users
                     [
                         'allow' => true,

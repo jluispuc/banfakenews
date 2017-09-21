@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'created_at', 'label' => 'Fecha de Reporte'],
             // 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            # ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
