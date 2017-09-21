@@ -26,6 +26,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <div id="status"></div>
     <?php
     NavBar::begin([
         'brandLabel' => '#SismoMexico',

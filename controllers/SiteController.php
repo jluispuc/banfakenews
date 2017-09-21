@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
+use kartik\social\Module;
 
 class SiteController extends Controller
 {
@@ -82,6 +83,75 @@ class SiteController extends Controller
         }
         return $this->render('login', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionValidateFb()
+    {
+        $social = Yii::$app->getModule('social');
+        $fb = $social->getFb(); // gets facebook object based on module settings
+        try {
+            $helper = $fb->getRedirectLoginHelper();
+            $accessToken = $helper->getAccessToken();
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            // There was an error communicating with Graph
+            return $this->render('validate-fb', [
+                'out' => '<div class="alert alert-danger">' . $e->getMessage() . '</div>'
+            ]);
+        }
+        if (isset($accessToken)) { // you got a valid facebook authorization token
+            $response = $fb->get('/me?fields=id,name,email', $accessToken);
+            
+            if(Yii::$app->request->get('src') == 'register'){
+                $model = new SignupForm();
+                $model->username = $response->getGraphUser()['email'];
+                $model->email = $response->getGraphUser()['email'];
+                $model->password = $response->getGraphUser()['id'];
+
+                if ($user = $model->signup()) {
+                    if (Yii::$app->getUser()->login($user)) {
+                        return $this->goHome();
+                    }
+                } else {
+                    var_dump($model->getErrors());
+                    exit();
+                }
+                
+        
+                return $this->render('signup', [
+                    'model' => $model,
+                ]);
+            } else {
+                $model = new LoginForm();
+                $model->username = $response->getGraphUser()['email'];
+                $model->password = $response->getGraphUser()['id'];
+
+                if ($model->login()) {
+                    return $this->goHome();
+                }
+
+                return $this->render('login', [
+                    'model' => $model,
+                ]);
+            }
+            
+            return $this->render('validate-fb', [
+                'out' => '<legend>Facebook User Details</legend>' . '<pre>' . print_r($response->getGraphUser(), true) . '</pre> <p>'.$source.'</p>'
+            ]);
+        } elseif ($helper->getError()) {
+            // the user denied the request
+            // You could log this data . . .
+            return $this->render('validate-fb', [
+                'out' => '<legend>Validation Log</legend><pre>' .
+                '<b>Error:</b>' . print_r($helper->getError(), true) .
+                '<b>Error Code:</b>' . print_r($helper->getErrorCode(), true) .
+                '<b>Error Reason:</b>' . print_r($helper->getErrorReason(), true) .
+                '<b>Error Description:</b>' . print_r($helper->getErrorDescription(), true) .
+                '</pre>'
+            ]);
+        }
+        return $this->render('validate-fb', [
+            'out' => '<div class="alert alert-warning"><h4>Oops! Nothing much to process here.</h4></div>'
         ]);
     }
 

@@ -5,9 +5,20 @@ $db = require(__DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic',
+    'language' => 'es_MX',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'America/Mexico_City',
+    'modules' => [
+        'social' => [
+            'class' => 'kartik\social\Module',
+            'facebook' => [
+                'appId' => '619713981749419',
+                'secret' => 'ab9f5ce2604a3b90b6d845a5cb1d0dce',
+                'default_graph_version' => 'v2.10',
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

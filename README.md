@@ -39,14 +39,20 @@ REQUIREMENTS
 ------------
 
 The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+Also you must use composer for installation. If you don't have it installed, use this script for installing it from the main repository
 
+```php
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/bin/composer # This folder is for Ubuntu/Debian
+```
 
 INSTALLATION
 ------------
 
 1. Clone this repository
-2. Apply this command for downloading packages.
+2. Apply these commands for downloading packages.
 ```php 
+composer global require "fxp/composer-asset-plugin:1.0.0"
 composer install 
 ```
 3. Check directories and files permissions.
