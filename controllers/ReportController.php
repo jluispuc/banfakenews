@@ -24,11 +24,6 @@ class ReportController extends Controller
                 'class' => \yii\filters\AccessControl::className(),
                 'only' => ['index', 'create', 'update', 'delete'],
                 'rules' => [
-                    // deny all POST requests
-                    [
-                        'allow' => false,
-                        'verbs' => ['POST']
-                    ],
                     // allow authenticated users
                     [
                         'allow' => true,

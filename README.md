@@ -1,5 +1,11 @@
-Yii 2 Basic Project Template
+Ban the Fake News
 ============================
+Report the fake news and stop the spreading of them.
+
+This small platform rises from the Sept. 19, 2017 earthquake in Mexico and its objective is stopping the spread of all fake news made by unstabilizing people or any fact. It has been done with Yii Framework 2.
+
+WHAT IS YII ???
+---------------
 
 Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 rapidly creating small projects.
@@ -38,73 +44,41 @@ The minimum requirement by this project template that your Web server supports P
 INSTALLATION
 ------------
 
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:^1.3.1"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
+1. Clone this repository
+2. Apply this command for downloading packages.
+```php 
+composer install 
 ```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
-
+3. Check directories and files permissions.
+4. Enjoy the development.
 
 CONFIGURATION
 -------------
 
 ### Database
-
+Copy the `config/db.php.deploy` file renamin it to `db.php`
 Edit the file `config/db.php` with real data, for example:
 
 ```php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
+    'dsn' => 'mysql:host=localhost;dbname=<your database>',
+    'username' => '<your mysql username>',
+    'password' => '<your mysql password>',
     'charset' => 'utf8',
 ];
 ```
 
 **NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
+- The platform won't create the database for you, this has to be done manually before you can access it.
 - Check and edit the other files in the `config/` directory to customize your application as required.
 - Refer to the README in the `tests` directory for information specific to basic application tests.
 
 
-
-TESTING
+UNITARY TESTING
 -------
+
+If you want to develop Unitary Tests, feel free to include them, just send me your pull request. Here are some Yii Framework tips for tests.
 
 Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
 By default there are 3 test suites:
