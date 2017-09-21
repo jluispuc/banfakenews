@@ -12,7 +12,7 @@ $this->title = 'Ban the Fake News';
         <p class="lead">En tiempos como el de #SismoCDMX, es necesario deshacernos de las noticias falsas.</p> 
         <p class="lead">Reporta las mismas para tener un control sobre ellas y poder reportarlas a la comunidad.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Reportar Noticia Falsa</a></p>
+        <p><a class="btn btn-lg btn-success" href="/site/login">Reportar Noticia Falsa</a></p>
     </div>
 
     <div class="body-content">

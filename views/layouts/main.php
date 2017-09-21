@@ -34,25 +34,22 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    if (Yii::$app->user->isGuest) { 
+        $menuItems[] = ['label' => 'Regístrate', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']]; 
+    } else { 
+        $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
+        $menuItems[] = ['label' => 'Consultar', 'url' => ['/report/index']];
+        $menuItems[] = ['label' => 'Agregar un Reporte', 'url' => ['/report/create']];
+        $menuItems[] = [ 
+            'label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post'] 
+        ]; 
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Consultar', 'url' => ['/report/index']],
-            ['label' => 'Agregar un Reporte', 'url' => ['/report/create']],
-            /*Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )*/
-        ],
+        'items' => $menuItems,
     ]);
     NavBar::end();
     ?>
