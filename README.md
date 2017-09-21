@@ -50,7 +50,8 @@ INSTALLATION
 composer install 
 ```
 3. Check directories and files permissions.
-4. Enjoy the development.
+4. Mount the SQL file included in repository.
+5. Enjoy the development.
 
 CONFIGURATION
 -------------
