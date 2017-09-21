@@ -19,7 +19,7 @@ class ReportsSearch extends Reports
     {
         return [
             [['id_report'], 'integer'],
-            [['fake_news_title', 'possible_text_fake_news', 'url_source_fake_news', 'created_at', 'updated_at'], 'safe'],
+            [['fake_news_title', 'possible_text_fake_news', 'url_source_fake_news', 'url_refute', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 

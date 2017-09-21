@@ -36,7 +36,7 @@ class Reports extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['fake_news_title'], 'string', 'max' => 300],
             [['possible_text_fake_news'], 'string', 'max' => 255],
-            [['url_source_fake_news'], 'string', 'max' => 500],
+            [['url_source_fake_news', 'url_refute'], 'string', 'max' => 500],
         ];
     }
 
@@ -62,6 +62,7 @@ class Reports extends \yii\db\ActiveRecord
             'fake_news_title' => 'Fake News Title',
             'possible_text_fake_news' => 'Possible Text Fake News',
             'url_source_fake_news' => 'Url Source Fake News',
+            'url_source_fake_news' => 'Url Refute Fake News',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

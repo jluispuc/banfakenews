@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->created_at,
             ],
             [
-                'label' => 'Fecha de Emisión del Reporte',
+                'label' => 'Fecha de Última Actualización del Reporte',
                 'value' => $model->updated_at,
             ],
         ],

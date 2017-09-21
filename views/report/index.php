@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'id_report', 'label' => 'ID'],
             ['attribute' => 'fake_news_title', 'label' => 'Título'],
             ['attribute' => 'url_source_fake_news', 'label' => 'URL o Red Social'],
+            ['attribute' => 'url_refute', 'label' => 'URL que Refuta'],
             ['attribute' => 'created_at', 'label' => 'Fecha de Reporte'],
             // 'updated_at',
 

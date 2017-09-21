@@ -18,6 +18,8 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'url_source_fake_news')->textInput(['maxlength' => true])->label('URL o Red Social de Origen') ?>
 
+    <?= $form->field($model, 'url_refute')->textInput(['maxlength' => true])->label('URL que refuta la Noticia') ?>
+
     <div class="form-group text-center">
         <?= Html::submitButton($model->isNewRecord ? 'Levantar Reporte' : 'Actualizar Reporte', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
