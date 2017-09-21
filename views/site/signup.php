@@ -6,9 +6,12 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
+use kartik\social\FacebookPlugin;
 
 $this->title = 'Registro';
 $this->params['breadcrumbs'][] = $this->title;
+FacebookPlugin::widget(['appId'=>'619713981749419']);
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -27,8 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="form-group text-center">
                     <?= Html::submitButton('Regístrate', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?php
+                        
+                            $social = Yii::$app->getModule('social');
+                            $callback = Url::toRoute(['/site/validate-fb', 'src' => 'register'], true); // or any absolute url you want to redirect
+                            echo $social->getFbLoginLink($callback, ['class'=>'btn btn-primary']);
+                        
+                    ?>
                 </div>
-
             <?php ActiveForm::end(); ?>
         </div>
     </div>
