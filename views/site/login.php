@@ -38,5 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
+        <div class="form-group">
+            ¿No tienes usuario? <a href="/signup">Regístrate aquí</a>
+        </div>
+
     <?php ActiveForm::end(); ?>
 </div>
