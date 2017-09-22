@@ -37,14 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'false' => function ($url, $model, $key){
                         return Html::a(
-                                '<button type="button" class="btn btn-danger">+</button>',
-                                ['ReportController/votingFalse', 'id' => $model->id]
+                                '<button type="button" class="btn btn-danger"> '.(empty($model->false))? 0 : $model->false . ' + </button>',
+                                ['report/votingFalse', 'id' => $model->id_report]
                         );
                     },
                     'dontFalse' => function ($url, $model, $key){
                         return Html::a(
-                            '<button type="button" class="btn btn-secondary">-</button>',
-                            ['ReportController/votingDontFalse', 'id' => $model->id]
+                            '<button type="button" class="btn btn-secondary"> '.(empty($model->dont_false))? 0 : $model->false . ' - </button>',
+                            ['report/votingDontFalse', 'id' => $model->id_report]
                         );
                     }
                 ]
