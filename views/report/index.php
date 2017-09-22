@@ -31,7 +31,26 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'created_at', 'label' => 'Fecha de Reporte'],
             // 'updated_at',
 
-            # ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{false} {dontFalse}',
+                'buttons' => [
+                    'false' => function ($url, $model, $key){
+                        return Html::a(
+                                '<button type="button" class="btn btn-danger">+</button>',
+                                ['ReportController/votingFalse', 'id' => $model->id]
+                        );
+                    },
+                    'dontFalse' => function ($url, $model, $key){
+                        return Html::a(
+                            '<button type="button" class="btn btn-secondary">-</button>',
+                            ['ReportController/votingDontFalse', 'id' => $model->id]
+                        );
+                    }
+                ]
+
+
+            ],
         ],
     ]); ?>
 </div>
