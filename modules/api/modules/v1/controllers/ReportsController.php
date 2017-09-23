@@ -40,7 +40,7 @@ class ReportsController extends Controller
         $allowed = array_map('strtoupper', $verbs);
         if (!in_array($verb, $allowed)) {
             $this->getHeader(403);
-            echo json_encode(['status' => 0, 'error_code' => 400, 'message' => 'Method not allowed'], JSON_PRETTY_PRINT);
+            echo (['status' => 0, 'error_code' => 400, 'message' => 'Method not allowed']);
             exit;
         }
         return true;
@@ -49,17 +49,17 @@ class ReportsController extends Controller
     public function actionIndex(){
         $this->getHeader(200);
         $model = Reports::find()->asArray()->all();
-        return json_encode($model);
+        return ($model);
     }
 
     public function actionView($id){
         if(Yii::$app->request->get('id')) {
             $model = Reports::find()->andWhere(['id_report' => $id])->asArray()->one();
             $this->getHeader(200);
-            return json_encode($model);
+            return ($model);
         } else {
             $this->getHeader(400);
-            echo json_encode(['status' => 0, 'error_code' => 400, 'message' => 'Please send me a valid ID.'], JSON_PRETTY_PRINT);
+            echo (['status' => 0, 'error_code' => 400, 'message' => 'Please send me a valid ID.']);
         }
     }
 
@@ -68,10 +68,10 @@ class ReportsController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->getHeader(200);
-            return json_encode(['status' => 200, 'message' => 'Inserción correcta']);
+            return (['status' => 200, 'message' => 'Inserción correcta']);
         } else {
             $this->getHeader(400);
-            return json_encode($model->getErrors());
+            return ($model->getErrors());
         }
     }
 
@@ -80,10 +80,10 @@ class ReportsController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->getHeader(200);
-            return json_encode(['status' => 200, 'message' => 'Actualizacion correcta']);
+            return (['status' => 200, 'message' => 'Actualizacion correcta']);
         } else {
             $this->getHeader(400);
-            return json_encode($model->getErrors());
+            return ($model->getErrors());
         }
     }
 
