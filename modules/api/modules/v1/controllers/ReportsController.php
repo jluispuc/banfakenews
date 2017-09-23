@@ -47,13 +47,15 @@ class ReportsController extends Controller
     }
 
     public function actionIndex(){
+        $this->getHeader(200);
         $model = Reports::find()->asArray()->all();
         return json_encode($model);
     }
 
-    public function actionView(){
+    public function actionView($id){
         if(Yii::$app->request->get('id')) {
-            $model = Reports::find()->andWhere(['id_report' => Yii::$app->request->get('id')])->asArray()->one();
+            $model = Reports::find()->andWhere(['id_report' => $id])->asArray()->one();
+            $this->getHeader(200);
             return json_encode($model);
         } else {
             $this->getHeader(400);
@@ -65,7 +67,8 @@ class ReportsController extends Controller
         $model = new Reports();
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return json_encode(['status' => 200, 'message' => 'Insercion correcta']);
+            $this->getHeader(200);
+            return json_encode(['status' => 200, 'message' => 'Inserción correcta']);
         } else {
             $this->getHeader(400);
             return json_encode($model->getErrors());
@@ -76,6 +79,7 @@ class ReportsController extends Controller
         $model = $this->findModel($id);
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->getHeader(200);
             return json_encode(['status' => 200, 'message' => 'Actualizacion correcta']);
         } else {
             $this->getHeader(400);
@@ -85,11 +89,8 @@ class ReportsController extends Controller
 
     private function getHeader($status)
     {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $status_header = 'HTTP/1.1 ' . $status . ' ' . $this->getStatusCodeMessage($status);
-        $content_type = "application/json; charset=utf-8";
-        header($status_header);
-        header('Content-type: ' . $content_type);
-        header('SecretKey: ' . "xxxxx");
     }
     private function getStatusCodeMessage($status)
     {
