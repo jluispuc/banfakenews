@@ -18,7 +18,7 @@ class ReportsController extends Controller
                     'index' => ['get'],
                     'view' => ['get'],
                     'create' => ['post'],
-                    'update' => ['put'],
+                    'update' => ['post'],
                     'delete' => ['delete'],
                     'hashtags' => ['get'],
                 ],
@@ -61,12 +61,26 @@ class ReportsController extends Controller
         }
     }
 
-    public function actionHashtags(){
-
+    public function actionCreate(){
+        $model = new Reports();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return json_encode(['status' => 200, 'message' => 'Insercion correcta']);
+        } else {
+            $this->getHeader(400);
+            return json_encode($model->getErrors());
+        }
     }
 
-    public function actionHashtag(){
+    public function actionUpdate($id){
+        $model = $this->findModel($id);
         
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return json_encode(['status' => 200, 'message' => 'Actualizacion correcta']);
+        } else {
+            $this->getHeader(400);
+            return json_encode($model->getErrors());
+        }
     }
 
     private function getHeader($status)
@@ -91,4 +105,20 @@ class ReportsController extends Controller
         ];
         return (isset($codes[$status])) ? $codes[$status] : '';
     }
+
+    /**
+     * Finds the Reports model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Reports the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+     protected function findModel($id)
+     {
+         if (($model = Reports::findOne($id)) !== null) {
+             return $model;
+         } else {
+             throw new NotFoundHttpException('The requested page does not exist.');
+         }
+     }
 }

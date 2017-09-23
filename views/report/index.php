@@ -36,15 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{false} {dontFalse}',
                 'buttons' => [
                     'false' => function ($url, $model, $key){
+                        $false = ($model->false == null) ? 0 : $model->false;
+
                         return Html::a(
-                                '<button type="button" class="btn btn-danger"> '.(empty($model->false))? 0 : $model->false . ' + </button>',
-                                ['report/votingFalse', 'id' => $model->id_report]
+                                '<button type="button" class="btn btn-danger"> '. $false . ' + </button>',
+                                ['report/voting-false', 'id' => $model->id_report]
                         );
                     },
                     'dontFalse' => function ($url, $model, $key){
+                        $dontFalse = ($model->dont_false == null) ? 0 : $model->dont_false;
                         return Html::a(
-                            '<button type="button" class="btn btn-secondary"> '.(empty($model->dont_false))? 0 : $model->false . ' - </button>',
-                            ['report/votingDontFalse', 'id' => $model->id_report]
+                            '<button type="button" class="btn btn-secondary"> '. $dontFalse . ' - </button>',
+                            ['report/voting-dont-false', 'id' => $model->id_report]
                         );
                     }
                 ]

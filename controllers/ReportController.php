@@ -138,20 +138,24 @@ class ReportController extends Controller
      * @param $id
      * @throws NotFoundHttpException
      */
-    public function votingFalse($id){
+    public function actionVotingFalse($id){
 
         if ( ($report = Reports::findOne($id)) !== null ){
 
-            if ( empty($report->false) ){
+            var_dump($report->false);
+
+            if ($report->false == null){
                $voting = 1;
             } else {
-               $voting = $report->false++;
+               $voting = $report->false + 1;
             }
 
             Reports::updateAll(
                 array('false' => $voting),
                 'id_report = ' . $id
             );
+
+            return $this->redirect(['index']);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -162,20 +166,22 @@ class ReportController extends Controller
      * @param $id
      * @throws NotFoundHttpException
      */
-    public function votingDontFalse($id){
+    public function actionVotingDontFalse($id){
 
         if ( ($report = Reports::findOne($id)) !== null ){
 
             if ( empty($report->dont_false) ){
                 $voting = 1;
             } else {
-                $voting = $report->dont_false++;
+                $voting = $report->dont_false + 1;
             }
 
             Reports::updateAll(
                 array('dont_false' => $voting),
                 'id_report = ' . $id
             );
+
+            return $this->redirect(['index']);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
