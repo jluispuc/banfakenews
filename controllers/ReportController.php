@@ -132,4 +132,58 @@ class ReportController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Add 1 to report by id in the field false
+     * @param $id
+     * @throws NotFoundHttpException
+     */
+    public function actionVotingFalse($id){
+
+        if ( ($report = Reports::findOne($id)) !== null ){
+
+            var_dump($report->false);
+
+            if ($report->false == null){
+               $voting = 1;
+            } else {
+               $voting = $report->false + 1;
+            }
+
+            Reports::updateAll(
+                array('false' => $voting),
+                'id_report = ' . $id
+            );
+
+            return $this->redirect(['index']);
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Add 1 to report by id in the field dont_false
+     * @param $id
+     * @throws NotFoundHttpException
+     */
+    public function actionVotingDontFalse($id){
+
+        if ( ($report = Reports::findOne($id)) !== null ){
+
+            if ( empty($report->dont_false) ){
+                $voting = 1;
+            } else {
+                $voting = $report->dont_false + 1;
+            }
+
+            Reports::updateAll(
+                array('dont_false' => $voting),
+                'id_report = ' . $id
+            );
+
+            return $this->redirect(['index']);
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }
