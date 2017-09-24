@@ -56,10 +56,10 @@ class Zones extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'zone_id' => 'Zone ID',
-            'name' => 'Name',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'zone_id' => 'ID',
+            'name' => 'Nombre',
+            'created_at' => 'Fecha creación',
+            'updated_at' => 'Fecha actualización',
         ];
     }
 
