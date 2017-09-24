@@ -26,6 +26,19 @@ use yii\behaviors\TimestampBehavior;
  */
 class Urgencies extends \yii\db\ActiveRecord
 {
+    private static $levels = [
+        'alto' => 'Alto',
+        'medio' => 'Medio',
+        'bajo' => 'Bajo'
+    ];
+
+    private static $need_brigade_values = [
+        'si' => 'Sí',
+        'no' => 'No',
+        'relevos' => 'Relevos',
+        '-' => '-'
+    ];
+
     /**
      * @inheritdoc
      */
@@ -40,6 +53,7 @@ class Urgencies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['zone_id', 'level'], 'required'],
             [['zone_id', 'created_at', 'updated_at'], 'integer'],
             [['level', 'need_brigade', 'supplies_required', 'supplies_accept', 'supplies_not_required'], 'string'],
             [['address', 'detail_source'], 'string', 'max' => 250]
@@ -63,18 +77,18 @@ class Urgencies extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'urgency_id' => 'Urgency ID',
-            'zone_id' => 'Zone ID',
-            'level' => 'Level',
-            'need_brigade' => 'Need Brigade',
-            'supplies_required' => 'Supplies Required',
-            'supplies_accept' => 'Supplies Accept',
-            'supplies_not_required' => 'Supplies Not Required',
-            'address' => 'Address',
-            'detail_source' => 'Detail Source',
-            'last_updated' => 'Last Updated',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'urgency_id' => 'ID',
+            'zone_id' => 'Zona',
+            'level' => 'Nivel',
+            'need_brigade' => '¿Necesitan brigadistas?',
+            'supplies_required' => 'Insumos necesarios',
+            'supplies_accept' => 'Insumos que aceptan',
+            'supplies_not_required' => 'Insumos no requeridos',
+            'address' => 'Dirección',
+            'detail_source' => 'Detalle/Origen/Fuente',
+            'last_updated' => 'Actualización',
+            'created_at' => 'Fecha creación',
+            'updated_at' => 'Fecha actualización',
         ];
     }
 
@@ -84,5 +98,27 @@ class Urgencies extends \yii\db\ActiveRecord
     public function getZone()
     {
         return $this->hasOne(Zones::className(), ['zone_id' => 'zone_id']);
+    }
+
+    /**
+     * Devuelve los Niveles de Urgencia
+     *
+     * @return array
+     * @author Raúl Cruz Carmona <cruzcraul@gmail.com>
+     */
+    public static function getLevels()
+    {
+        return self::$levels;
+    }
+
+    /**
+     * Devuelve un array con los valores para indicar si se necesitan brigadistas
+     *
+     * @return array
+     * @author Raúl Cruz Carmona <cruzcraul@gmail.com>
+     */
+    public static function getNeedBrigadeValues()
+    {
+        return self::$need_brigade_values;
     }
 }
