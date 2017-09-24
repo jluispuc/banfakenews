@@ -17,17 +17,28 @@ class ZoneController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+     public function behaviors()
+     {
+         return [
+             'access' => [
+                 'class' => \yii\filters\AccessControl::className(),
+                 'only' => ['create', 'update', 'delete'],
+                 'rules' => [
+                     [
+                         'allow' => true,
+                         'actions' => ['login', 'signup', 'index'],
+                         'roles' => ['?'],
+                     ],
+                     // allow authenticated users
+                     [
+                         'allow' => true,
+                         'roles' => ['@'],
+                     ],
+                     // everything else is denied
+                 ],
+             ],
+         ];
+     }
 
     /**
      * Lists all Zones models.
