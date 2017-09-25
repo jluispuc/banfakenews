@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'dontFalse' => function ($url, $model, $key){
                         $dontFalse = ($model->dont_false == null) ? 0 : $model->dont_false;
+                        
                         return Html::a(
                             '<button type="button" class="btn btn-secondary"> '. $dontFalse . ' - </button>',
                             ['report/voting-dont-false', 'id' => $model->id_report]
